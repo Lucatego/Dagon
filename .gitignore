@@ -1,2 +1,4 @@
 # Folder with images used to speed up the developmente. This media is not used by the interpreter.
 /media
+# The compiled data
+/build
