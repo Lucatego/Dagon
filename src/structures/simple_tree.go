@@ -2,30 +2,46 @@ package structures
 
 import (
 	"dagon/src/syntax/valid_types"
+	"errors"
 	"fmt"
 )
 
-type simple_tree[T valid_types.Types] struct {
+/*
+	Simple_tree[T] struct:
+
+It contains the head node from tree_node and the size of the tree. It also works
+as a bridge for the functions in tree_node.
+*/
+type Simple_tree[T valid_types.Types] struct {
 	head *tree_node[T]
 	size int64
 }
 
-func CreateTree[T valid_types.Types]() *simple_tree[T] {
-	return &simple_tree[T]{
+func CreateTree[T valid_types.Types]() *Simple_tree[T] {
+	return &Simple_tree[T]{
 		head: nil,
 		size: 0,
 	}
 }
 
-func (t *simple_tree[T]) Add(data T) {
+func (t *Simple_tree[T]) Add(data T) error {
 	// First case
 	if t.head == nil {
-		t.head = CreateNode(data)
-		return
+		t.head = createNode(data)
+	} else {
+		// Other cases
+		err := t.head.insertData(data)
+		if err != nil {
+			return fmt.Errorf("error: Tree unable to insert new data [Unexpected Error: %s.]", err.Error())
+		}
 	}
-	// Other cases
-	err := t.head.InsertData(data)
-	if err != nil {
-		panic(fmt.Sprintf("Error: Tree unable to insert new data [Unexpected Error: %s.]", err.Error()))
+	t.size++
+	return nil
+}
+
+func (t *Simple_tree[T]) Find(data T) (bool, error) {
+	if t.head == nil {
+		return false, errors.New("error: The tree is empty [Usage error: Add data before using Find function]")
 	}
+	return t.head.find(data), nil
 }
