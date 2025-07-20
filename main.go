@@ -1,5 +1,7 @@
 package main
 
-func main() {
+import "dagon/src/interpreter"
 
+func main() {
+	interpreter.Start()
 }
