@@ -1,7 +1,7 @@
 package structures
 
 import (
-	"dagon/src/syntax/valid_types"
+	"dagon/src/syntax/types"
 	"errors"
 	"fmt"
 )
@@ -12,12 +12,12 @@ import (
 It contains the head node from tree_node and the size of the tree. It also works
 as a bridge for the functions in tree_node.
 */
-type Simple_tree[T valid_types.Types] struct {
+type Simple_tree[T types.Types] struct {
 	head *tree_node[T]
 	size int64
 }
 
-func CreateTree[T valid_types.Types]() *Simple_tree[T] {
+func CreateTree[T types.Types]() *Simple_tree[T] {
 	return &Simple_tree[T]{
 		head: nil,
 		size: 0,

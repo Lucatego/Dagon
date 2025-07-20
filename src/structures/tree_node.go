@@ -1,18 +1,17 @@
 package structures
 
 import (
+	"dagon/src/syntax/types"
 	"errors"
-
-	"dagon/src/syntax/valid_types"
 )
 
-type tree_node[T valid_types.Types] struct {
+type tree_node[T types.Types] struct {
 	data  T
 	left  *tree_node[T]
 	right *tree_node[T]
 }
 
-func createNode[T valid_types.Types](data T) *tree_node[T] {
+func createNode[T types.Types](data T) *tree_node[T] {
 	return &tree_node[T]{
 		data:  data,
 		left:  nil,
