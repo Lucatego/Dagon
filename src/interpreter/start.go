@@ -6,17 +6,20 @@ import (
 )
 
 func Start() {
-	fmt.Println("Dagon - A basic interpreted language made in Go.")
-	fmt.Printf("Hi %s. Working directory: %s\n", core.Username, core.Dir)
-	fmt.Println("Type 'exit' to quit the interpreter.")
+	presentation()
 	for {
-		fmt.Printf("> ")
+		fmt.Printf("%s ~ %s > ", core.Username, core.Dir)
 		var input string
 		fmt.Scanf("%s\n", &input)
 		if input == "exit" {
 			break
 		}
-		SyntaxValidator()
-		// inputManager()
+		tokens := SyntaxValidator(&input)
+		InputManager(tokens)
 	}
+}
+
+func presentation() {
+	fmt.Println("Dagon - A basic interpreted language made in Go - v0.0.1a-pre-alpha")
+	fmt.Println("Type 'exit' to quit the interpreter.")
 }
