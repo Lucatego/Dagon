@@ -1,5 +1,7 @@
 package interpreter
 
-func SyntaxValidator() {
+func SyntaxValidator(input *string) []string {
+	var tokens []string
 
+	return tokens
 }

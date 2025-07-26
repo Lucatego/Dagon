@@ -11,4 +11,6 @@ const (
 	IntergerType ValueType = iota
 	RealType
 	StringType
+	// COUNTER_ValueType is used to count the number of value types
+	COUNTER_ValueType
 )

@@ -11,7 +11,7 @@ var (
 func InitialAllocation() {
 	// Create a map for each variable type
 	// IntergerType, RealType, StringType
-	accessVariables = make([]map[string]any, 3)
+	accessVariables = make([]map[string]any, types.COUNTER_ValueType)
 	// Initialize each map
 	initializeVariablesMemory()
 }
