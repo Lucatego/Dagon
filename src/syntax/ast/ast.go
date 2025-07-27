@@ -1,6 +1,8 @@
 package ast
 
-import "dagon/src/syntax/tokens"
+import (
+	"dagon/src/syntax/tokens"
+)
 
 type Node interface {
 	TokenLiteral() string
@@ -19,6 +21,14 @@ type Expression interface {
 type Program struct {
 	Statements []Statement
 }
+
+type ReturnStatement struct {
+	Token       tokens.Token
+	ReturnValue Expression
+}
+
+func (rs *ReturnStatement) statementNode()       {}
+func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Lexeme }
 
 type AssignStatement struct {
 	Token tokens.Token
