@@ -4,6 +4,7 @@ import (
 	"dagon/src/core"
 	"dagon/src/interpreter"
 	"dagon/src/memory"
+	"os"
 )
 
 func main() {
@@ -13,5 +14,5 @@ func main() {
 	// components
 	core.StartRuntime()
 	// The CLI, the way the user interacts with the Runtime
-	interpreter.Start()
+	interpreter.Start(os.Stdin, os.Stdout)
 }
