@@ -1,21 +1,34 @@
 package interpreter
 
 import (
+	"bufio"
 	"dagon/src/core"
+	"dagon/src/syntax/lexer"
+	"dagon/src/syntax/tokens"
 	"fmt"
+	"io"
 )
 
-func Start() {
+func Start(in io.Reader, out io.Writer) {
 	presentation()
+	scanner := bufio.NewScanner(in)
 	for {
 		fmt.Printf("%s ~ %s > ", core.Username, core.Dir)
-		var input string
-		fmt.Scanf("%s\n", &input)
-		if input == "exit" {
+		input := scanner.Scan()
+		if !input {
 			break
 		}
-		tokens := SyntaxValidator(&input)
-		InputManager(tokens)
+		line := scanner.Text()
+		if line == "exit" {
+			break
+		}
+		l := lexer.New(line)
+
+		for tok := l.NextToken(); tok.Type != tokens.EOF; tok = l.NextToken() {
+			fmt.Printf("%+v\n", tok)
+		}
+		//tokens := SyntaxValidator(&l)
+		//InputManager(tokens)
 	}
 }
 
