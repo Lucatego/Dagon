@@ -8,9 +8,9 @@ import (
 
 func TestAsignStatements(t *testing.T) {
 	input := `
-	Int x = 5;
+	String x = "HOLA";
 	Int y = 10;
-	Int  481923;`
+	String x = "481923";`
 	l := lexer.New(input)
 	p := New(l)
 

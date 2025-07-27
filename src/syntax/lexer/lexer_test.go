@@ -13,12 +13,12 @@ func TestNextToken(t *testing.T) {
 	}{
 		{tokens.INT_TYPE, "Int"},
 		{tokens.IDENT, "y"},
-		{tokens.EQUAL, "="},
+		{tokens.ASSIGN, "="},
 		{tokens.INTEGER_LITERAL, "20"},
 		{tokens.SEMICOLON, ";"},
 		{tokens.INT_TYPE, "Int"},
 		{tokens.IDENT, "x"},
-		{tokens.EQUAL, "="},
+		{tokens.ASSIGN, "="},
 		{tokens.INTEGER_LITERAL, "10"},
 		{tokens.SEMICOLON, ";"},
 	}

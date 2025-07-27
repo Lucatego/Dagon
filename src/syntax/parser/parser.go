@@ -58,7 +58,7 @@ func (p *Parser) ParseProgram() *ast.Program {
 
 func (p *Parser) parseStatement() ast.Statement {
 	switch p.curToken.Type {
-	case tokens.INT_TYPE:
+	case tokens.INT_TYPE, tokens.REAL_TYPE, tokens.STRING_TYPE:
 		return p.parseAssignStatement()
 	default:
 		return nil
@@ -74,7 +74,7 @@ func (p *Parser) parseAssignStatement() *ast.AssignStatement {
 
 	stmt.Name = &ast.Identifier{Token: p.curToken, Value: p.curToken.Lexeme}
 
-	if !p.expectPeek(tokens.EQUAL) {
+	if !p.expectPeek(tokens.ASSIGN) {
 		return nil
 	}
 
