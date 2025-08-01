@@ -8,7 +8,7 @@ have never wrote a line of code before) for compiled languages like **Java**, **
 ## Syntaxis
 The syntaxis of Dagon will be like **C/C++** or **Java** but it will also be easy to learn and use like **Python**.
 
-### Example of the sytax:
+### Example of the syntax:
 ```java
 String letters = "Hello World!";
 Int number = 1256;
