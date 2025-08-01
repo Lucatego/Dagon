@@ -5,7 +5,7 @@ import (
 )
 
 var (
-	accessVariables [](map[string]any)
+	accessVariables []map[string]any
 )
 
 func InitialAllocation() {
