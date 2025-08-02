@@ -67,6 +67,8 @@ func New(l *lexer.Lexer) *Parser {
 	p.prefixParseFns = make(map[tokens.TokenType]prefixParseFn)
 	p.registerPrefix(tokens.IDENT, p.parseIdentifier)
 	p.registerPrefix(tokens.INTEGER_LITERAL, p.parseIntegerLiteral)
+	p.registerPrefix(tokens.STRING_LITERAL, p.parseStringLiteral)
+	p.registerPrefix(tokens.REAL_LITERAL, p.parseRealLiteral)
 	p.registerPrefix(tokens.NEG, p.parsePrefixExpression)
 	p.registerPrefix(tokens.MINUS, p.parsePrefixExpression)
 	p.registerPrefix(tokens.TRUE, p.parseBoolean)
@@ -248,6 +250,37 @@ func (p *Parser) parseIntegerLiteral() ast.Expression {
 	value, err := strconv.ParseInt(p.curToken.Lexeme, 0, 64)
 	if err != nil {
 		msg := fmt.Sprintf("could not parse %q as integer", p.curToken.Lexeme)
+		p.errors = append(p.errors, msg)
+		return nil
+	}
+
+	lit.Value = value
+
+	return lit
+}
+
+func (p *Parser) parseStringLiteral() ast.Expression {
+	lit := &ast.StringLiteral{Token: p.curToken}
+
+	value := p.curToken.Lexeme
+	if p.curToken.Type != tokens.STRING_LITERAL {
+		msg := fmt.Sprintf("se esperaba un string literal, se obtuvo %s", p.curToken.Type)
+		p.errors = append(p.errors, msg)
+		return nil
+	}
+
+	lit.Value = value
+
+	return lit
+}
+
+func (p *Parser) parseRealLiteral() ast.Expression {
+	lit := &ast.RealLiteral{Token: p.curToken}
+
+	value, err := strconv.ParseFloat(lit.Token.Lexeme, 64)
+
+	if err != nil {
+		msg := fmt.Sprintf("could not parse %q as floating", p.curToken.Lexeme)
 		p.errors = append(p.errors, msg)
 		return nil
 	}

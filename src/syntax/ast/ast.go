@@ -111,6 +111,26 @@ func (il *IntegerLiteral) expressionNode()      {}
 func (il *IntegerLiteral) TokenLiteral() string { return il.Token.Lexeme }
 func (il *IntegerLiteral) String() string       { return il.Token.Lexeme }
 
+// Adding String type
+type StringLiteral struct {
+	Token tokens.Token
+	Value string
+}
+
+func (sl *StringLiteral) expressionNode()      {}
+func (sl *StringLiteral) TokenLiteral() string { return sl.Token.Lexeme }
+func (sl *StringLiteral) String() string       { return sl.Token.Lexeme }
+
+// Adding Real type
+type RealLiteral struct {
+	Token tokens.Token
+	Value float64
+}
+
+func (rl *RealLiteral) expressionNode()      {}
+func (rl *RealLiteral) TokenLiteral() string { return rl.Token.Lexeme }
+func (rl *RealLiteral) String() string       { return rl.Token.Lexeme }
+
 type PrefixExpression struct {
 	Token    tokens.Token
 	Operator string
