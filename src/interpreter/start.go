@@ -3,9 +3,9 @@ package interpreter
 import (
 	"bufio"
 	"dagon/src/core"
+	"dagon/src/interpreter/evaluator"
 	"dagon/src/syntax/lexer"
 	"dagon/src/syntax/parser"
-	"dagon/src/syntax/tokens"
 	"fmt"
 	"io"
 )
@@ -32,11 +32,11 @@ func Start(in io.Reader, out io.Writer) {
 			continue
 		}
 
-		io.WriteString(out, program.String())
-		io.WriteString(out, "\n")
+		evaluated := evaluator.Eval(program)
 
-		for tok := l.NextToken(); tok.Type != tokens.EOF; tok = l.NextToken() {
-			fmt.Printf("%+v\n", tok)
+		if evaluated != nil {
+			io.WriteString(out, evaluated.Inspect())
+			io.WriteString(out, "\n")
 		}
 		//tokens := SyntaxValidator(&l)
 		//InputManager(tokens)
