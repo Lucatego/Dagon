@@ -5,6 +5,7 @@ import (
 	"dagon/src/core"
 	"dagon/src/interpreter/evaluator"
 	"dagon/src/syntax/lexer"
+	"dagon/src/syntax/object"
 	"dagon/src/syntax/parser"
 	"fmt"
 	"io"
@@ -13,6 +14,7 @@ import (
 func Start(in io.Reader, out io.Writer) {
 	presentation()
 	scanner := bufio.NewScanner(in)
+	env := object.NewEnvironment()
 	for {
 		fmt.Printf("%s ~ %s > ", core.Username, core.Dir)
 		input := scanner.Scan()
@@ -32,7 +34,7 @@ func Start(in io.Reader, out io.Writer) {
 			continue
 		}
 
-		evaluated := evaluator.Eval(program)
+		evaluated := evaluator.Eval(program, env)
 
 		if evaluated != nil {
 			io.WriteString(out, evaluated.Inspect())
