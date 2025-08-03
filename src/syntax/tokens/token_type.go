@@ -3,26 +3,21 @@ package tokens
 type TokenType int16
 
 const (
-	// Literales
-	INTEGER_LITERAL TokenType = iota
-	REAL_LITERAL
-	STRING_LITERAL
-
-	// Identificadores y fin
-	IDENT
+	// Special tokens
+	IDENT TokenType = iota
 	EOF
 	ILLEGAL
 
-	// Operadores
+	// Operators
 	ASSIGN
 	PLUS
 	MINUS
 	TIMES
 	DIVIDE
 
+	// Logic operators
 	EQ
 	NEQ
-	NEG
 	LT
 	GT
 	LE
@@ -31,90 +26,117 @@ const (
 	OR
 	NOT
 
-	// Separadores
+	// Logic values
+	TRUE
+	FALSE
+
+	// Separators
 	SEMICOLON
 	COMMA
 
 	// Tipos de variables
-	INT_TYPE
-	REAL_TYPE
-	STRING_TYPE
+	INT
+	REAL
+	STRING
+	BOOLEAN
 
-	// Mixtos
-	LPAREN
-	RPAREN
-	LBRACE
-	RBRACE
-	LBRACKET
-	RBRACKET
+	//Data
+	INT_LITERAL
+	REAL_LITERAL
+	STRING_LITERAL
 
-	LET
+	// Structure tokens
+	LPAREN   //(
+	RPAREN   //)
+	LBRACE   //{
+	RBRACE   //}
+	LBRACKET //[
+	RBRACKET //]
+
+	// Keywords
 	IF
 	ELSE
-	WHILE
 	FOR
 	RETURN
+	BREAK
 	FUNCTION
-	TRUE
-	FALSE
 )
 
 var tokenNames = map[TokenType]string{
-	INTEGER_LITERAL: "INTEGER_LITERAL",
-	REAL_LITERAL:    "REAL_LITERAL",
-	STRING_LITERAL:  "STRING_LITERAL",
-	IDENT:           "IDENT",
-	EOF:             "EOF",
-	ILLEGAL:         "ILLEGAL",
-	ASSIGN:          "ASSIGN",
-	PLUS:            "PLUS",
-	MINUS:           "MINUS",
-	TIMES:           "TIMES",
-	DIVIDE:          "DIVIDE",
-	EQ:              "EQ",
-	NEQ:             "NEQ",
-	NEG:             "NEG",
-	LT:              "LT",
-	GT:              "GT",
-	LE:              "LE",
-	GE:              "GE",
-	AND:             "AND",
-	OR:              "OR",
-	NOT:             "NOT",
-	SEMICOLON:       "SEMICOLON",
-	COMMA:           "COMMA",
-	INT_TYPE:        "INT_TYPE",
-	REAL_TYPE:       "REAL_TYPE",
-	STRING_TYPE:     "STRING_TYPE",
-	LPAREN:          "(",
-	RPAREN:          ")",
-	LBRACE:          "{",
-	RBRACE:          "}",
-	LBRACKET:        "[",
-	RBRACKET:        "]",
-	LET:             "LET",
-	IF:              "IF",
-	ELSE:            "ELSE",
-	WHILE:           "WHILE",
-	FOR:             "FOR",
-	RETURN:          "RETURN",
-	FUNCTION:        "FUNCTION",
-	TRUE:            "TRUE",
-	FALSE:           "FALSE",
+	// Special tokens
+	IDENT:   "IDENT",
+	EOF:     "EOF",
+	ILLEGAL: "ILLEGAL",
+
+	// Operators
+	ASSIGN: "ASSIGN",
+	PLUS:   "PLUS",
+	MINUS:  "MINUS",
+	TIMES:  "TIMES",
+	DIVIDE: "DIVIDE",
+
+	// Logic operators
+	EQ:  "EQ",
+	NEQ: "NEQ",
+	NOT: "NOT",
+	LT:  "LT",
+	GT:  "GT",
+	LE:  "LE",
+	GE:  "GE",
+	AND: "AND",
+	OR:  "OR",
+
+	// Logic values
+	TRUE:  "TRUE",
+	FALSE: "FALSE",
+
+	// Separators
+	SEMICOLON: "SEMICOLON",
+	COMMA:     "COMMA",
+
+	// Data types
+	INT:     "INT",
+	REAL:    "REAL",
+	STRING:  "STRING",
+	BOOLEAN: "BOOLEAN",
+
+	//Data values
+	INT_LITERAL:    "INT_LITERAL",
+	REAL_LITERAL:   "REAL_LITERAL",
+	STRING_LITERAL: "STRING_LITERAL",
+
+	// Structure tokens
+	LPAREN:   "LPAREN",
+	RPAREN:   "RPAREN",
+	LBRACE:   "LBRACE",
+	RBRACE:   "RBRACE",
+	LBRACKET: "LBRACKET",
+	RBRACKET: "RBRACKET",
+
+	// Keywords
+	IF:       "IF",
+	ELSE:     "ELSE",
+	FOR:      "FOR",
+	BREAK:    "BREAK",
+	RETURN:   "RETURN",
+	FUNCTION: "FUNCTION",
 }
 
 var keywords = map[string]TokenType{
-	"Int":    INT_TYPE,
-	"Real":   REAL_TYPE,
-	"String": STRING_TYPE,
+	"Int":    INT,
+	"Real":   REAL,
+	"String": STRING,
+	"Bool":   BOOLEAN,
+
 	"if":     IF,
 	"else":   ELSE,
 	"for":    FOR,
-	"while":  WHILE,
 	"return": RETURN,
-	"fnt":    FUNCTION,
-	"true":   TRUE,
-	"false":  FALSE,
+	"break":  BREAK,
+	"func":   FUNCTION,
+
+	"true":  TRUE,
+	"false": FALSE,
 }
 
 func (tt TokenType) String() string {

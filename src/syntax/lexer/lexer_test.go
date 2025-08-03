@@ -6,20 +6,28 @@ import (
 )
 
 func TestNextToken(t *testing.T) {
-	input := `Int y = 20; Int x = 10;`
+	input := `
+	Int y = 20; 
+	Int x = 10;
+	Int x1x2 = 200;`
 	tests := []struct {
 		expectedType    tokens.TokenType
 		expectedLiteral string
 	}{
-		{tokens.INT_TYPE, "Int"},
+		{tokens.INT, "Int"},
 		{tokens.IDENT, "y"},
 		{tokens.ASSIGN, "="},
-		{tokens.INTEGER_LITERAL, "20"},
+		{tokens.INT_LITERAL, "20"},
 		{tokens.SEMICOLON, ";"},
-		{tokens.INT_TYPE, "Int"},
+		{tokens.INT, "Int"},
 		{tokens.IDENT, "x"},
 		{tokens.ASSIGN, "="},
-		{tokens.INTEGER_LITERAL, "10"},
+		{tokens.INT_LITERAL, "10"},
+		{tokens.SEMICOLON, ";"},
+		{tokens.INT, "Int"},
+		{tokens.IDENT, "x1x2"},
+		{tokens.ASSIGN, "="},
+		{tokens.INT_LITERAL, "200"},
 		{tokens.SEMICOLON, ";"},
 	}
 

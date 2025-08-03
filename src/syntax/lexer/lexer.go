@@ -35,9 +35,8 @@ func (l *Lexer) NextToken() tokens.Token {
 	switch l.ch {
 	case '=':
 		if l.peekChar() == '=' {
-			ch := l.ch
 			l.readChar()
-			tok = tokens.Token{Type: tokens.EQ, Lexeme: string(ch) + string(l.ch)}
+			tok = tokens.Token{Type: tokens.EQ, Lexeme: "=="}
 		} else {
 			tok = newToken(tokens.ASSIGN, l.ch)
 		}
@@ -67,25 +66,22 @@ func (l *Lexer) NextToken() tokens.Token {
 		tok = newToken(tokens.RBRACKET, l.ch)
 	case '!':
 		if l.peekChar() == '=' {
-			ch := l.ch
 			l.readChar()
-			tok = tokens.Token{Type: tokens.NEQ, Lexeme: string(ch) + string(l.ch)}
+			tok = tokens.Token{Type: tokens.NEQ, Lexeme: "!="}
 		} else {
-			tok = newToken(tokens.NEG, l.ch)
+			tok = newToken(tokens.NOT, l.ch)
 		}
 	case '<':
 		if l.peekChar() == '=' {
-			ch := l.ch
 			l.readChar()
-			tok = tokens.Token{Type: tokens.LE, Lexeme: string(ch) + string(l.ch)}
+			tok = tokens.Token{Type: tokens.LE, Lexeme: "<="}
 		} else {
 			tok = newToken(tokens.LT, l.ch)
 		}
 	case '>':
 		if l.peekChar() == '=' {
-			ch := l.ch
 			l.readChar()
-			tok = tokens.Token{Type: tokens.GE, Lexeme: string(ch) + string(l.ch)}
+			tok = tokens.Token{Type: tokens.GE, Lexeme: ">="}
 		} else {
 			tok = newToken(tokens.GT, l.ch)
 		}
@@ -107,28 +103,30 @@ func (l *Lexer) NextToken() tokens.Token {
 		} else {
 			tok = newToken(tokens.ILLEGAL, l.ch)
 		}
-
 	}
 
 	l.readChar()
-	return tok
-}
 
-func (l *Lexer) readIdentifier() string {
-	position := l.position
-	for isLetter(l.ch) {
-		l.readChar()
-	}
-	return l.input[position:l.position]
+	return tok
 }
 
 func isLetter(ch byte) bool {
 	return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_'
 }
 
+func (l *Lexer) readIdentifier() string {
+	position := l.position
+	for isLetter(l.ch) || isDigit(l.ch) {
+		l.readChar()
+	}
+	// Returns an slice, in other words, a substring of the input
+	return l.input[position:l.position]
+}
+
 func (l *Lexer) readNumber() (string, tokens.TokenType) {
 	position := l.position
-	tokenType := tokens.INTEGER_LITERAL
+	tokenType := tokens.INT_LITERAL
+
 	for isDigit(l.ch) {
 		l.readChar()
 	}

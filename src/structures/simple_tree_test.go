@@ -1,14 +1,14 @@
-package src_test
+package structures
 
 import (
-	"dagon/src/structures"
 	"fmt"
 	"math/rand"
+	"testing"
 )
 
-func SimpleTreeTest() {
+func TestSimpleTree(t *testing.T) {
 	// 1
-	tree := structures.CreateTree[int64]()
+	tree := CreateTree[int64]()
 	// 2
 	var max int
 	fmt.Print("Enter the number of nodes to create: ")

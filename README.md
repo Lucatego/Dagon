@@ -10,10 +10,18 @@ The syntaxis of Dagon will be like **C/C++** or **Java** but it will also be eas
 
 ### Example of the syntax:
 ```java
+// Initialization
 String letters = "Hello World!";
 Int number = 1256;
 Real pi = 3.14159265358979;
-
+Bool isPiEqualThree = true;
+// Runtime
+number = 3;
+// Joke
+if (pi == number) {
+    Print("Pi = ", 3)
+}
+// End
 Print(letters, number, pi);
 ```
 ## Important Dates
